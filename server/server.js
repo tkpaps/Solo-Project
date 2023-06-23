@@ -1,11 +1,15 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const cookieController = require('./controllers/cookie');
 
 const PORT = 3000;
 
 const app = express();
+
+const mongoURI = 'mongodb+srv://tkpaps:Codesmith@cluster0.bdxsemx.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(mongoURI)
 
 app.use(express.json());
 
@@ -26,7 +30,7 @@ app.get('/signup', (req, res) => {
 // route handler for homepage
 app.get('/homepage', (req, res) => {
     console.log('GET request for homepage has fired');
-    res.sendfile(path.resolve(__dirname, '../client/index.html'));
+    res.sendFile(path.resolve(__dirname, '../client/index.html'));
 })
 
 // global error handler
