@@ -1,0 +1,36 @@
+{
+  "name": "solo-project",
+  "version": "1.0.0",
+  "description": "Yearly goal tracker",
+  "main": "index.js",
+  "scripts": {
+    "start": "export NODE_ENV=development; nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkpaps/Solo-Project.git"
+  },
+  "author": "Thomas Pappas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tkpaps/Solo-Project/issues"
+  },
+  "homepage": "https://github.com/tkpaps/Solo-Project#readme",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "chai": "^3.5.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mocha": "^2.4.5",
+    "mongoose": "6.7.5",
+    "nodemon": "^1.8.1",
+    "redis": "^2.4.2",
+    "sinon": "^1.17.3",
+    "supertest": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.0"
+  }
+}
