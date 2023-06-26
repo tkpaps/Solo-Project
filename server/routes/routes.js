@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 
-const cookieController = require('../controllers/cookie');
+const cookieController = require('../controllers/cookieController');
 const userController = require('../controllers/userController');
 
 const router = express.Router();
@@ -11,7 +11,7 @@ const router = express.Router();
 // route handler for login/initial page and cookie creation
 router.get('/', cookieController.setCookie, (req, res) => {
     console.log('GET request for cookie controller has fired');
-    res.sendFile(path.resolve(__dirname, '../../client/login.html'));
+    res.sendStatus(200).sendFile(path.resolve(__dirname, '../../client/login.html'));
 });
 
 // route handler for signup page
@@ -19,12 +19,6 @@ router.get('/signup', (req, res) => {
     console.log('GET request for signup has fired');
     res.sendFile(path.resolve(__dirname, '../../client/signup.html'));
 });
-
-// route handler for homepage
-// app.get('/homepage', (req, res) => {
-//     console.log('GET request for homepage has fired');
-//     res.sendFile(path.resolve(__dirname, '../client/index.html'));
-// })
 
 // route handler for post request for creating a new user
 router.post('/signup', userController.createUser, (req, res) => {
