@@ -1,13 +1,13 @@
-const User = require('../models/userModel')
+const models = require('../models/userModel')
 
 const userController = {};
 
 userController.createUser = (req, res, next) => {
+  const dateCreated = Date.now();
+  const { username, password, email, firstName, lastName } = req.body;
+  const input = { username, password, email, firstName, lastName, dateCreated };
 
-  const { username, password } = req.body;
-  const input = { username, password };
-
-  User.create(input)
+  models.User.create(input)
     .then(data => {
       console.log(data);
       res.locals.newUser = data;
@@ -26,7 +26,7 @@ userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   const user = { username, password };
 
-  User.findOne(user)
+  models.User.findOne(user)
     .then(data => {
         console.log(data);
         res.locals.user = data;

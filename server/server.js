@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 
-const cookieController = require('./controllers/cookie');
-const userController = require('./controllers/userController');
+const router = require('./routes/routes');
 
 const PORT = 3000;
 
@@ -21,46 +20,16 @@ mongoose.connect(mongoURI, err => {
       });
     }
   });
-  
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 
-// route handler for login/initial page and cookie creation
-app.get('/', cookieController.setCookie, (req, res) => {
-    console.log('GET request for cookie controller has fired');
-    res.sendFile(path.resolve(__dirname, '../client/login.html'));
-});
+app.use('/', router);
 
-// route handler for signup page
-app.get('/signup', (req, res) => {
-    console.log('GET request for signup has fired');
-    res.sendFile(path.resolve(__dirname, '../client/signup.html'));
-});
-
-// route handler for homepage
-// app.get('/homepage', (req, res) => {
-//     console.log('GET request for homepage has fired');
-//     res.sendFile(path.resolve(__dirname, '../client/index.html'));
-// })
-
-// route handler for post request for creating a new user
-app.post('/signup', userController.createUser, (req, res) => {
-  console.log('POST request for signup has fired');
-  res.sendFile(path.resolve(__dirname, '../client/index.html'));
-});
-
-// route handler to verify login if user already has an account
-app.post('/', userController.verifyUser, (req, res) => {
-    console.log('POST request for verifyUser has fired')
-    if (res.locals.user){
-        res.sendFile(path.resolve(__dirname, '../client/index.html'));
-    } else {
-        res.redirect('/signup');
-    }
-});
+// catch-all route handler for any requests to an unknown route
+app.use((req, res) => res.status(404).send('404 page not found'));
 
 // global error handler
 app.use((err, req, res, next) => {

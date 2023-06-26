@@ -9,8 +9,10 @@
 <body>
     <h1>Login Page</h1>
     <form method="POST" action='/'>
-        <input name="username" type="text" placeholder="username"></input>
-        <input name="password" type="password" placeholder="password"></input>
+        <p>Username</p>
+        <input name="username" type="text" placeholder="username" required></input>
+        <p>Password</p>
+        <input name="password" type="password" placeholder="password" required></input>
         <input type='submit' value="login">
       </form>
       <a href='./signup'>Sign up</a>
