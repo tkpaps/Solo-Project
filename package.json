@@ -4,9 +4,9 @@
   "description": "Yearly goal tracker",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=development; nodemon server/server.js",
+    "start": "node server/server.js",
     "dev": "NODE_ENV=development concurrently \"nodemon --watch server ./server/server.js\" \"webpack serve --open\"",
-    "build": "webpack --config webpack.config.js --mode production",
+    "build": "NODE_ENV=production webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,15 +36,36 @@
     "nodemon": "^1.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
     "redis": "^2.4.2",
     "sinon": "^1.17.3",
     "style-loader": "^3.3.3",
-    "supertest": "^1.1.0",
-    "webpack": "^5.88.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "supertest": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.12.0"
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "ajv": "^8.12.0",
+    "babel-loader": "^8.2.3",
+    "concurrently": "^5.0.0",
+    "cross-env": "^6.0.3",
+    "css-loader": "^6.5.1",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react": "^7.21.5",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^1.18.9",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0",
+    "webpack-hot-middleware": "^2.24.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build",
+      "client/"
+    ]
   }
 }
