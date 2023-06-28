@@ -36,7 +36,7 @@
     "nodemon": "^1.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^5.3.4",
+    "react-router-dom": "^5.3",
     "redis": "^2.4.2",
     "sinon": "^1.17.3",
     "style-loader": "^3.3.3",

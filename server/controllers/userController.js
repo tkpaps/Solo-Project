@@ -1,4 +1,4 @@
-const models = require('../models/userModel')
+const models = require('../models/userModel');
 
 const userController = {};
 
@@ -28,16 +28,16 @@ userController.verifyUser = (req, res, next) => {
 
   models.User.findOne(user)
     .then(data => {
-        console.log(data);
-        res.locals.user = data;
-        return next();
+      console.log(data);
+      res.locals.user = data;
+      return next();
     })
     .catch (error => {
-        return next({
-          log: 'an error occurred in verifying a user',
-          status: 400,
-          message: 'an error occurred in verifyUser controller'
-        });
+      return next({
+        log: 'an error occurred in verifying a user',
+        status: 400,
+        message: 'an error occurred in verifyUser controller'
+      });
     });
 };
 
