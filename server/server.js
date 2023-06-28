@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-// const bodyParser = require('body-parer');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const router = require('./routes/routes');
 
@@ -24,6 +25,20 @@ mongoose.connect(mongoURI, err => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: 'tkpaps', 
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: mongoURI, 
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, 
+    },
+  })
+);
 
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 

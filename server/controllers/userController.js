@@ -3,7 +3,10 @@ const models = require('../models/userModel');
 const userController = {};
 
 userController.createUser = (req, res, next) => {
-  const dateCreated = Date.now();
+
+  const newDate = Date.now();
+  const dateCreated = new Date(newDate);
+
   const { username, password, email, firstName, lastName } = req.body;
   const input = { username, password, email, firstName, lastName, dateCreated };
 
