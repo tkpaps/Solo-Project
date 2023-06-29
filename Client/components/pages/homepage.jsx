@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoalComponent from '../components/goal';
+import '../../stylesheets/style.css';
 
 function HomePage() {
 
@@ -71,11 +72,13 @@ function HomePage() {
     <div>
       <h1>Set Your Goals Here!</h1>
       <form>
+        <>Name of Goal: </>
         <input value={inputValue} onChange={handleInputChange} placeholder="your goal here"></input>
-        <p>Enter the number of times you want to accomplish your goal</p>
+        <br></br>
+        <>Your Goal: </>
         <input value={goalAmount} onChange={handleGoalAmountChange} type="number" placeholder="Goal"></input>
         <p></p>
-        <button onClick={handleButtonClick}>Add Goal</button>
+        <button className="homepage-button" onClick={handleButtonClick}>Add Goal</button>
       </form>
       {showGoal && 
       goalList.map((goal, index) => (

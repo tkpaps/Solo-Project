@@ -12,7 +12,7 @@ userController.createUser = (req, res, next) => {
 
   models.User.create(input)
     .then(data => {
-      console.log(data);
+      // console.log(data);
       res.locals.newUser = data;
       return next();
     })
@@ -31,7 +31,7 @@ userController.verifyUser = (req, res, next) => {
 
   models.User.findOne(user)
     .then(data => {
-      console.log(data);
+      // console.log(data);
       res.locals.user = data;
       return next();
     })

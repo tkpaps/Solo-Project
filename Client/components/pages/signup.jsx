@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
+import '../../stylesheets/style.css';
 
-// import stylesheets
 
 const Signup = () => {
 
@@ -51,13 +51,19 @@ const Signup = () => {
 
   return (
     <div>
-      <h1>Sign Up Page</h1>
+      <h1>Signup for a New Account</h1>
       <form method="Post" action="/api/signup">
         <input name="username" type="text" placeholder="username"></input>
+        <br></br>
         <input name="password" type="password" placeholder="password"></input>
+        <br></br>
         <input name="email" type="text" placeholder="email"></input>
+        <br></br>
         <input name="firstName" type="text" placeholder="First Name"></input>
+        <br></br>
         <input name="lastName" type="text" placeholder="Last Name"></input>
+        <br></br>
+        <p></p>
         <input type="submit" value="Create Account"></input>
       </form>
     </div>

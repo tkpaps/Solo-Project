@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import '../../stylesheets/style.css';
 
 function Login() {
 
@@ -16,10 +17,7 @@ function Login() {
     const formDataObject = {};
     for (const [key, value] of formData.entries()) {
       formDataObject[key] = value;
-      console.log(key, value);
     }
-
-    console.log(formDataObject);
 
     fetch('/', {
       method: 'POST',
@@ -43,15 +41,20 @@ function Login() {
 
   return (
     <div>
-      <h1>Login Page</h1>
+      <h1>Welcome to YearCrusher!</h1>
+      <h3>Login or Signup to Continue</h3>
       <form method="POST" action="/api/login">
-        <p>Username</p>
+        <p></p>
         <input name="username" type="text" placeholder="username" required></input>
-        <p>Password</p>
+        <p></p>
         <input name="password" type="password" placeholder="password" required></input>
+        <p></p>
         <input type='submit'></input>
       </form>
-      <a href='./signup'>Sign up</a>
+      <p></p>
+      <div className="container">
+        <a className="centered-anchor" href='./signup'>Sign up</a>
+      </div>
     </div>
   );
 }

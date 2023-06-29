@@ -45,8 +45,9 @@ router.post('/homepage', goalController.addGoal, (req, res) => {
   res.status(200).json(res.locals.goals);
 });
 
+// route handler to get goals on homepage load
 router.get('/homepage', goalController.getGoals, (req, res) => {
-  console.log('GET Request for user getGoals has fired');
+  console.log('GET Request for getGoals has fired');
   res.status(200).json(res.locals.goals);
 });
 
@@ -54,6 +55,12 @@ router.get('/homepage', goalController.getGoals, (req, res) => {
 router.put('/homepage', goalController.incrementGoal, (req, res) => {
   console.log('PUT request for incrementGoal has fired');
   res.status(200).json(res.locals.goals);
+});
+
+// route handler to delete a goal
+router.delete('/homepage', goalController.deleteGoal, (req, res) => {
+  console.log('DELETE request for deleteGoal has fired');
+  res.sendStatus(200);
 });
 
 module.exports = router;

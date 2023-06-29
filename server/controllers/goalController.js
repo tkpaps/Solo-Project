@@ -12,7 +12,7 @@ goalController.addGoal = (req, res, next) => {
 
   models.Data.create(input)
     .then(data => {
-      console.log(data);
+      // console.log(data);
       res.locals.goals = data;
       return next();
     })
@@ -31,7 +31,7 @@ goalController.getGoals = (req, res, next) => {
      
   models.Data.find({ foreign_id: foreignId })
     .then(goals => {
-      console.log(goals);
+      // console.log(goals);
       res.locals.goals = goals;
       return next();
     })
@@ -56,8 +56,27 @@ goalController.incrementGoal = (req, res, next) => {
     { new: true }
   )
     .then(data => {
-      console.log(data);
+      // console.log(data);
       res.locals.goals = data;
+      return next();
+    })
+    .catch(error => {
+      return next({
+        log: 'an error occured in adding a goal',
+        status: 400,
+        message: 'an error occured in addGoal controller'
+      });
+    });
+};
+
+goalController.deleteGoal = (req, res, next) => {
+  const { goalName } = req.body;
+  const userId = req.session.userId;
+  const input = { goalName, foreign_id: userId };
+
+  models.Data.findOneAndDelete(input)
+    .then(data => {
+      // console.log(data);
       return next();
     })
     .catch(error => {
