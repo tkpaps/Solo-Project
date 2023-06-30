@@ -42,6 +42,11 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  next();
+});
+
 // server static pages
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 

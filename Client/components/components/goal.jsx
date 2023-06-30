@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../../stylesheets/style.css';
 
-const GoalComponent = ({ goal, times, countProp}) => {
+const GoalComponent = ({ goal, times, countProp, type}) => {
 
   const [count, setCount] = useState(countProp);
   const [progress, setProgress] = useState(0);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isGoalCompleted, setIsGoalCompleted] = useState(false);
 
   useEffect(() => {
     const calculateProgress = () => {
@@ -15,6 +16,18 @@ const GoalComponent = ({ goal, times, countProp}) => {
 
     calculateProgress();
   }, [count, times]);
+
+  useEffect(() => {
+    if (count === times) {
+      setIsGoalCompleted(true);
+
+      // Reset the component after 3 seconds
+      setTimeout(() => {
+        setIsGoalCompleted(false);
+        deleteGoal();
+      }, 3000);
+    }
+  }, [count, times, countProp]);
       
   const handleIncrement = () => {
     setCount((prevCount) => prevCount + 1);
@@ -70,18 +83,29 @@ const GoalComponent = ({ goal, times, countProp}) => {
     return null;
   }
 
+  if (count === times) {
+    // Render the component differently when count === times
+    return (
+      <div>
+        <h2 className="h2-completed">Goal Completed!</h2>
+        <p className="p-completed">Congratulations, you have reached your goal.</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="goalComponent">
         <h2 className="centered-p">{goal}</h2>
-        <p className="centered-p">Goal: {times}</p>
-        <p className="centered-p">Progress: {count}</p>
+        <p className="centered-p">Goal: {times} {type}</p>
+        <p className="centered-p">Progress: {count} {type}</p>
         <div className="progress-bar-container">
           <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+          <span className="progress-text">{`${Math.floor(progress)}%`} </span>
         </div>
         <p></p>
         <div className="container">
-          <button className="centered-button" onClick={handleIncrement}>Another Day in the Books!</button>
+          <button className="centered-button" onClick={handleIncrement}>Another Step Towards Victory!</button>
         </div>
         <div className="delete-goal-container">
           <button className="delete-goal-button" onClick={deleteGoal}>X</button>

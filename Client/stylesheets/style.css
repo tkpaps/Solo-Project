@@ -3,12 +3,64 @@ body {
     font-family: 'Segoe UI', Tahoma Verdana, sans-serif;
   }
   
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    text-align: right;
+    background-color: #42b983;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .header-title {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: auto;
+  }
+  
+  header button {
+    background-color: #fff;
+    color: #42b983;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 25px;
+  }
+  
+  header button:hover {
+    background-color: #42b983;
+    color: #fff;
+  }
+  
+  header button:first-child {
+    margin-right: 10px;
+  }
+  
+
+  
+
 h1 {
     font-size: 30px;
     color: #333;
     font-weight: bold;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 120px;
   }
   
   h3 {
@@ -147,7 +199,20 @@ h1 {
   .progress-bar {
     height: 100%;
     background-color: #42b983;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
     /* Add any additional styling for the progress bar */
+  }
+
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 25px;
+    color: black;
+    font-weight: bold;
   }
 
   .delete-goal-container {
@@ -187,4 +252,19 @@ h1 {
   }
   .homepage-button:hover {
     background-color: #35a26b;
+  }
+
+  .h2-completed {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #42b983;
+    margin-top: 20px;
+  }
+  
+  .p-completed {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 10px;
   }

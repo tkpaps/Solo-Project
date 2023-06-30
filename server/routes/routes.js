@@ -8,7 +8,7 @@ const goalController = require('../controllers/goalController');
 const router = express.Router();
 
 
-// route handler for login/initial page and cookie creation
+// route handler for cookie creation
 router.get('/', cookieController.setCookie, (req, res) => {
   console.log('GET request for cookie controller has fired');
   res.status(200);
@@ -46,7 +46,7 @@ router.post('/homepage', goalController.addGoal, (req, res) => {
 });
 
 // route handler to get goals on homepage load
-router.get('/homepage', goalController.getGoals, (req, res) => {
+router.get('/homepage', userController.requireAuth, goalController.getGoals, (req, res) => {
   console.log('GET Request for getGoals has fired');
   res.status(200).json(res.locals.goals);
 });
@@ -61,6 +61,32 @@ router.put('/homepage', goalController.incrementGoal, (req, res) => {
 router.delete('/homepage', goalController.deleteGoal, (req, res) => {
   console.log('DELETE request for deleteGoal has fired');
   res.sendStatus(200);
+});
+
+router.get('/logout', (req, res) => {
+  console.log('GET request for logging out has fired');
+  console.log(req.session);
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.status(400).send('Unable to log out');
+      } else {
+        res.redirect('/');
+      }
+    });
+  } else {
+    res.end();
+  }
+});
+
+router.get('/check-authentication', userController.requireAuth, (req, res) => {
+  console.log('check authentication has fired');
+  res.json(res.locals);
+});
+
+router.get('/getName', userController.getName, (req, res) => {
+  console.log('GET request for getName has fired');
+  res.json(res.locals.user);
 });
 
 module.exports = router;

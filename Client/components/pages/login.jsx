@@ -4,7 +4,7 @@ import '../../stylesheets/style.css';
 function Login() {
 
   useEffect(() => {
-    document.title = 'Login | YearCrusher';
+    document.title = 'Login | GoalCrusher';
   }, []);
 
   function submitButton (event) {
@@ -41,7 +41,7 @@ function Login() {
 
   return (
     <div>
-      <h1>Welcome to YearCrusher!</h1>
+      <h1>Welcome to GoalCrusher!</h1>
       <h3>Login or Signup to Continue</h3>
       <form method="POST" action="/api/login">
         <p></p>

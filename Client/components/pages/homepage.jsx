@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import GoalComponent from '../components/goal';
+import Header from '../components/header';
 import '../../stylesheets/style.css';
 
 function HomePage() {
@@ -8,6 +10,29 @@ function HomePage() {
   const [inputValue, setInputValue] = useState('');
   const [goalAmount, setGoalAmount] = useState(0);
   const [goalList, setGoalList] = useState([]);
+  const [firstName, setName] = useState('');
+  const [type, setType] = useState('');
+
+  const history = useHistory();
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    fetch('/api/check-authentication', { method: 'GET', credentials: 'same-origin' })
+      .then(response => {
+        // console.log(response);
+        return response.json();
+      })
+      .then(data => {
+        // console.log(data);
+        if (!data.isAuthenticated) {
+          window.location.href = '/'; 
+        }
+      })
+      .catch(error => {
+        console.log('This is for auth:', error);
+      });
+  }, [history]);
+
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -17,6 +42,10 @@ function HomePage() {
     setGoalAmount(Number(e.target.value));
   };
 
+  const handleTypeAmountChange = (e) => {
+    setType(e.target.value);
+  };
+
   const handleButtonClick = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== '') {
@@ -24,7 +53,8 @@ function HomePage() {
       const formData = {
         goalName: inputValue,
         count: 0, 
-        goalNumber: goalAmount
+        goalNumber: goalAmount,
+        goalType: type
       };
 
       fetch('/api/homepage', {
@@ -35,7 +65,7 @@ function HomePage() {
         body: JSON.stringify(formData)
       })
         .then(response => {
-          console.log('this is the response: ', response);
+          // console.log('this is the response: ', response);
           return response.json();
         })
         .then(updatedGoal => {
@@ -43,6 +73,7 @@ function HomePage() {
           setInputValue('');
           setGoalAmount(0);
           setShowGoal(true);
+          setType('');
         })
         .catch(error => {
           console.log('Error occured during goal creation:', error);
@@ -57,8 +88,8 @@ function HomePage() {
       .then((goals) => {
         const input = [];
         for (let i = 0; i < goals.length; i++){
-          const {goalName, count, goalNumber} = goals[i];
-          input.push({goalName, count, goalNumber});
+          const {goalName, count, goalNumber, goalType} = goals[i];
+          input.push({goalName, count, goalNumber, goalType});
         }
         setGoalList(input);
         setShowGoal(true);
@@ -68,21 +99,39 @@ function HomePage() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch('/api/getName')
+      .then((response) => response.json())
+      .then(data => {
+        // console.log(data);
+        const { firstName } = data;
+        const name = { firstName };
+        setName(name.firstName);
+      })
+      .catch((error) => {
+        console.log('Error occurred while fetching goals:', error);
+      });
+  }, [] );
+
   return (
     <div>
-      <h1>Set Your Goals Here!</h1>
+      <Header />
+      <h1>Set Your Goals Here, {firstName.trim()}!</h1>
       <form>
         <>Name of Goal: </>
         <input value={inputValue} onChange={handleInputChange} placeholder="your goal here"></input>
         <br></br>
         <>Your Goal: </>
         <input value={goalAmount} onChange={handleGoalAmountChange} type="number" placeholder="Goal"></input>
+        <br></br>
+        <>Measurement: </>
+        <input value={type} onChange={handleTypeAmountChange} placeholder="type of goal"></input>
         <p></p>
         <button className="homepage-button" onClick={handleButtonClick}>Add Goal</button>
       </form>
       {showGoal && 
       goalList.map((goal, index) => (
-        <GoalComponent key={index} goal={goal.goalName} times={goal.goalNumber} countProp={Number(goal.count)}/>
+        <GoalComponent key={index} goal={goal.goalName} times={goal.goalNumber} countProp={Number(goal.count)} type={goal.goalType}/>
       ))}
     </div>
   );

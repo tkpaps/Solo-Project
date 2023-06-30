@@ -4,8 +4,8 @@ const goalController = {};
 
 goalController.addGoal = (req, res, next) => {
 
-  const { goalName, count, goalNumber } = req.body;
-  const input = { goalName, count, goalNumber };
+  const { goalName, count, goalNumber, goalType } = req.body;
+  const input = { goalName, count, goalNumber, goalType };
 
   const userId = req.session.userId;
   input.foreign_id = userId;
@@ -28,6 +28,18 @@ goalController.addGoal = (req, res, next) => {
 goalController.getGoals = (req, res, next) => {
 
   const foreignId = req.session.userId;  
+
+  // models.User.findOne( foreignId )
+  //   .then(data => {
+  //     res.locals.user = data;
+  //   })
+  //   .catch(error => {
+  //     return next({
+  //       log: 'an error occured in adding a goal',
+  //       status: 400,
+  //       message: 'an error occured in addGoal controller'
+  //     });
+  //   });
      
   models.Data.find({ foreign_id: foreignId })
     .then(goals => {

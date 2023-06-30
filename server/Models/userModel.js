@@ -14,6 +14,7 @@ const userDataSchema = new Schema({
   goalName: String,
   count: Number,
   goalNumber: Number,
+  goalType: String,
 
   foreign_id: {
     type: Schema.Types.ObjectId,
