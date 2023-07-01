@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import '../../stylesheets/style.css';
+import ConfettiUse from './confetti';
+
 
 
 const GoalComponent = ({ goal, times, countProp, type}) => {
@@ -31,7 +33,7 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
       setTimeout(() => {
         setIsGoalCompleted(false);
         deleteGoal();
-      }, 3000);
+      }, 5000);
     }
   }, [count, times, countProp]);
       
@@ -98,6 +100,7 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
       <div>
         <h2 className="h2-completed">Goal Completed!</h2>
         <p className="p-completed">Congratulations, you have reached your goal.</p>
+        <ConfettiUse />
       </div>
     );
   }

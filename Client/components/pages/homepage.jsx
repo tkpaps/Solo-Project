@@ -8,7 +8,7 @@ function HomePage() {
 
   const [showGoal, setShowGoal] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [goalAmount, setGoalAmount] = useState(0);
+  const [goalAmount, setGoalAmount] = useState(1);
   const [goalList, setGoalList] = useState([]);
   const [firstName, setName] = useState('');
   const [type, setType] = useState('');
@@ -68,7 +68,7 @@ function HomePage() {
         .then(updatedGoal => {
           setGoalList((prevGoals) => [...prevGoals, updatedGoal]);
           setInputValue('');
-          setGoalAmount(0);
+          setGoalAmount(1);
           setShowGoal(true);
           setType('');
         })
@@ -119,7 +119,7 @@ function HomePage() {
         <input value={inputValue} onChange={handleInputChange} placeholder="your goal here"></input>
         <br></br>
         <>Your Goal: </>
-        <input onChange={handleGoalAmountChange} type="number" min="1" placeholder='how many times?'></input>
+        <input value={goalAmount} onChange={handleGoalAmountChange} type="number" min="1" placeholder='how many times?'></input>
         <br></br>
         <>Measurement: </>
         <input value={type} onChange={handleTypeAmountChange} placeholder="type of goal"></input>
