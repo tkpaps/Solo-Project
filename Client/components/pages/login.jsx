@@ -1,43 +1,44 @@
 import React, { useEffect } from 'react';
 import '../../stylesheets/style.css';
 
+
 function Login() {
 
   useEffect(() => {
     document.title = 'Login | GoalCrusher';
   }, []);
 
-  function submitButton (event) {
+  // function submitButton (event) {
 
-    event.preventDefault();
+  //   event.preventDefault();
 
-    const form = event.target;
-    const formData = new FormData(form);
+  //   const form = event.target;
+  //   const formData = new FormData(form);
 
-    const formDataObject = {};
-    for (const [key, value] of formData.entries()) {
-      formDataObject[key] = value;
-    }
+  //   const formDataObject = {};
+  //   for (const [key, value] of formData.entries()) {
+  //     formDataObject[key] = value;
+  //   }
 
-    fetch('/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formDataObject)
-    })
-      .then(data => {
-        console.log('this data was hit', data);
-        if (data.ok) {
-          window.location.href = '/homepage';
-        } else {
-          console.log('login failed: ', data.error);
-        }
-      })
-      .catch(error => {
-        console.log('Error occurred during login: ', error);
-      });
-  }
+  //   fetch('/', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formDataObject)
+  //   })
+  //     .then(data => {
+  //       console.log('this data was hit', data);
+  //       if (data.ok) {
+  //         window.location.href = '/homepage';
+  //       } else {
+  //         console.log('login failed: ', data.error);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log('Error occurred during login: ', error);
+  //     });
+  // }
 
   return (
     <div>

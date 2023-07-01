@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../stylesheets/style.css';
 
+
 const GoalComponent = ({ goal, times, countProp, type}) => {
 
   const [count, setCount] = useState(countProp);
@@ -8,6 +9,11 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isGoalCompleted, setIsGoalCompleted] = useState(false);
 
+  // change progress bar color as it progresses - see style.css for more information
+  const progressColorClass = progress < 33 ? 'red' : progress < 66 ? 'yellow' : 'green';
+  const progressBarContainerClass = `progress-bar-container ${progressColorClass}`;
+
+  // calculates progress
   useEffect(() => {
     const calculateProgress = () => {
       const newProgress = (count / times) * 100;
@@ -17,10 +23,10 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
     calculateProgress();
   }, [count, times]);
 
+  // deletes rendering of goal component once complete and renders temporary success message
   useEffect(() => {
     if (count === times) {
       setIsGoalCompleted(true);
-
       // Reset the component after 3 seconds
       setTimeout(() => {
         setIsGoalCompleted(false);
@@ -29,6 +35,7 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
     }
   }, [count, times, countProp]);
       
+  // increments goal
   const handleIncrement = () => {
     setCount((prevCount) => prevCount + 1);
 
@@ -55,6 +62,7 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
       });
   };
 
+  // deletes goal
   const deleteGoal = () => {
 
     const input = { goalName: goal };
@@ -79,6 +87,7 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
       });
   };
 
+  // removes component from rendering immediately 
   if (isDeleted) {
     return null;
   }
@@ -99,7 +108,7 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
         <h2 className="centered-p">{goal}</h2>
         <p className="centered-p">Goal: {times} {type}</p>
         <p className="centered-p">Progress: {count} {type}</p>
-        <div className="progress-bar-container">
+        <div className={progressBarContainerClass}>
           <div className="progress-bar" style={{ width: `${progress}%` }}></div>
           <span className="progress-text">{`${Math.floor(progress)}%`} </span>
         </div>

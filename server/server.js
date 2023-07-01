@@ -47,7 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// server static pages
+// serve static pages
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 
 // use all routes in routes folder

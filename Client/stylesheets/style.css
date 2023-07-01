@@ -29,6 +29,14 @@ body {
     margin-top: 10px;
     margin-left: 20px;
     margin-right: auto;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .header-title:hover {
+    color: black;
+    transform: scale(1.05);
   }
   
   header button {
@@ -41,6 +49,7 @@ body {
     cursor: pointer;
     font-size: 16px;
     margin-right: 25px;
+    font-weight: bold;
   }
   
   header button:hover {
@@ -189,22 +198,44 @@ h1 {
     text-align: center;
   }
   
+  .progress-bar {
+    height: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+  }
+  
+  .progress-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-bar-container.green .progress-bar::before {
+    background-color: #42b983;
+  }
+  
+  .progress-bar-container.yellow .progress-bar::before {
+    background-color: #e0d44c;
+  }
+  
+  .progress-bar-container.red .progress-bar::before {
+    background-color: #e04c4c;
+  }
+  
   .progress-bar-container {
     width: 100%;
     height: 75px;
     background-color: #f0f0f0;
-    /* Add any additional styling for the progress bar container */
-  }
-  
-  .progress-bar {
-    height: 100%;
-    background-color: #42b983;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    /* Add any additional styling for the progress bar */
   }
 
+  
   .progress-text {
     position: absolute;
     top: 50%;
@@ -268,3 +299,66 @@ h1 {
     color: #666;
     margin-top: 10px;
   }
+
+.about-container {
+  margin-top: 100px;
+}
+
+.about-heading {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-list {
+  list-style-type: none;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.about-list-item {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #666;
+}
+
+.about-link {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #42b983;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.about-link:hover {
+  background-color: #35a26b;
+}
+
+.about-link:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(66, 185, 131, 0.5);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 14px;
+}

@@ -60,8 +60,6 @@ userController.getName = (req, res, next) => {
   
   const input = req.session.userId;
 
-  // console.log(input);
-
   models.User.findOne({_id: input })
     .then(data => {
       // console.log(data);

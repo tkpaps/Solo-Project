@@ -7,7 +7,6 @@ const goalController = require('../controllers/goalController');
 
 const router = express.Router();
 
-
 // route handler for cookie creation
 router.get('/', cookieController.setCookie, (req, res) => {
   console.log('GET request for cookie controller has fired');
@@ -63,6 +62,7 @@ router.delete('/homepage', goalController.deleteGoal, (req, res) => {
   res.sendStatus(200);
 });
 
+// route handler to logout
 router.get('/logout', (req, res) => {
   console.log('GET request for logging out has fired');
   console.log(req.session);
@@ -79,14 +79,29 @@ router.get('/logout', (req, res) => {
   }
 });
 
+// route handler to check auth
 router.get('/check-authentication', userController.requireAuth, (req, res) => {
   console.log('check authentication has fired');
   res.json(res.locals);
 });
 
+// route handler to get user name 
+// *** this could be implemented in above route handler by adding this controller as the last middleware in the middleware chain ***
 router.get('/getName', userController.getName, (req, res) => {
   console.log('GET request for getName has fired');
   res.json(res.locals.user);
+});
+
+// route handler to get about page
+router.get('/about', (req, res) => {
+  console.log('GET request for about page has fired');
+  res.redirect('/about');
+});
+
+// route handler for header homepage link
+router.get('/getHomepage', (req, res) => {
+  console.log('GET request for get Homepage has fired');
+  res.redirect('/homepage');
 });
 
 module.exports = router;

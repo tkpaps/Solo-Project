@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import GoalComponent from '../components/goal';
 import Header from '../components/header';
 import '../../stylesheets/style.css';
+
 
 function HomePage() {
 
@@ -13,17 +13,13 @@ function HomePage() {
   const [firstName, setName] = useState('');
   const [type, setType] = useState('');
 
-  const history = useHistory();
-
   useEffect(() => {
     // Check if the user is authenticated
     fetch('/api/check-authentication', { method: 'GET', credentials: 'same-origin' })
       .then(response => {
-        // console.log(response);
         return response.json();
       })
       .then(data => {
-        // console.log(data);
         if (!data.isAuthenticated) {
           window.location.href = '/'; 
         }
@@ -33,7 +29,7 @@ function HomePage() {
       });
   }, [history]);
 
-
+  // input change handlers
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -46,6 +42,7 @@ function HomePage() {
     setType(e.target.value);
   };
 
+  // create a new goal
   const handleButtonClick = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== '') {
@@ -122,7 +119,7 @@ function HomePage() {
         <input value={inputValue} onChange={handleInputChange} placeholder="your goal here"></input>
         <br></br>
         <>Your Goal: </>
-        <input value={goalAmount} onChange={handleGoalAmountChange} type="number" placeholder="Goal"></input>
+        <input onChange={handleGoalAmountChange} type="number" min="1" placeholder='how many times?'></input>
         <br></br>
         <>Measurement: </>
         <input value={type} onChange={handleTypeAmountChange} placeholder="type of goal"></input>
