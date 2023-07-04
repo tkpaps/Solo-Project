@@ -33,7 +33,7 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
       setTimeout(() => {
         setIsGoalCompleted(false);
         deleteGoal();
-      }, 5000);
+      }, 4000);
     }
   }, [count, times, countProp]);
       
@@ -98,9 +98,9 @@ const GoalComponent = ({ goal, times, countProp, type}) => {
     // Render the component differently when count === times
     return (
       <div>
+        <ConfettiUse />
         <h2 className="h2-completed">Goal Completed!</h2>
         <p className="p-completed">Congratulations, you have reached your goal.</p>
-        <ConfettiUse />
       </div>
     );
   }
